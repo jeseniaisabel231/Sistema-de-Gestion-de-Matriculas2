@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900");
+@import "tailwindcss";
+@keyframes slideInright {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slideOutleft {
+  from {
+    transform: translateX(0);
+    position: fixed;
+  }
+  to {
+    transform: translateX(-100%);
+    position: fixed;
+    display: none;
+  }
+}
+@theme {
+  --animate-activa: slideInright 0.65s forwards;
+  --animate-inactiva: slideOutleft 0.65s forwards;
+  --font-inter: "Inter", sans-serif;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
