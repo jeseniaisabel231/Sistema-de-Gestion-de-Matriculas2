@@ -1,13 +1,15 @@
 <h1 align='center'>
-  <img src='/app/src/main/res/drawable/logo.png' width=35 />
-  Frontend del Sistema de Gestión de Matrículas
-  <img src='/app/src/main/res/drawable/logo.png' width=35 />
+  <img src='https://github.com/user-attachments/assets/12051839-b657-4cb3-b5eb-4fee30101d1c' width=35 />
+  Frontend del Sistema de Gestión de Conferencias
+  <img src='https://github.com/user-attachments/assets/12051839-b657-4cb3-b5eb-4fee30101d1c' width=35 />
 </h1>
+
+<img src='https://github.com/user-attachments/assets/0c9a763f-6190-4a85-a0c0-2ce0b4b477ec'/>
 
 ## Descripción 🏫
 
 > [!IMPORTANT]
-> Este proyecto corresponde al frontend del Sistema de Gestión de Matrículas desarrollado en Angular para la administración de inscripciones en auditorios académicas.
+> Este proyecto corresponde al frontend del Sistema de Gestión de Conferencias desarrollado en Angular para la administración de inscripciones en auditorios.
 
 ## Integrantes y actividades 👥
 
