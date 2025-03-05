@@ -10,7 +10,7 @@ export function guardianAuthPrivada(){
 //proteger la ruta publicas
 export function guardianAuthPublicas(){
     if (verificarAuth()) {
-        return inject(Router).createUrlTree(['/modulo-materias']) 
+        return inject(Router).createUrlTree(['/modulo-auditorios']) 
     }
     return true
 }

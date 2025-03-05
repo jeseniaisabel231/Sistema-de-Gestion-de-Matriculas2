@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { estudiante } from '../interfaces/estudiante.interface';
-import { of, tap } from 'rxjs';
-import { materia } from '../interfaces/materia.interface';
+import { conferencista} from '../interfaces/conferencista.interface';
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class EstudiantesService {
+export class ConferencistasService {
   private urlBackend =
     'https://integrated-moina-jhonmata0427s-projects-e4972a05.koyeb.app/api/v1';
   private http = inject(HttpClient);
@@ -15,40 +14,40 @@ export class EstudiantesService {
   
 
   //////////////////////////////////////////////////////////////
-  //metodo get para obtener estudiantes
+  //metodo get para obtener conferencistas
   obtener() {
     
     return this.http
-      .get<estudiante[]>(`${this.urlBackend}/estudiantes`, {
+      .get<conferencista[]>(`${this.urlBackend}/conferencistas`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
   }
 
   //////////////////////////////////////////////////////////////
-  //metodo para eliminar un estudiante
+  //metodo para eliminar un conferencista
   eliminar(id: number) {
     return this.http
-      .delete<void>(`${this.urlBackend}/estudiantes/${id}`, {
+      .delete<void>(`${this.urlBackend}/conferencistas/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       
   }
 
   //////////////////////////////////////////////////////////////////
-  //metodo para actualizar estudiante
-  actualizar(id: number, datos: estudiante) {
+  //metodo para actualizar conferencista
+  actualizar(id: number, datos: conferencista) {
     return this.http
-      .put<estudiante>(`${this.urlBackend}/estudiantes/${id}`, datos, {//datos: es el cuerpo de solictud PUT
+      .put<conferencista>(`${this.urlBackend}/conferencistas/${id}`, datos, {//datos: es el cuerpo de solictud PUT
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
 
   }
 
   //////////////////////////////////////////////////////////////////
-  //metodo para crear estudiantes
-  crear(estudiante: estudiante) {
+  //metodo para crear conferencistas
+  crear(conferencista: conferencista) {
     return this.http
-      .post<estudiante>(`${this.urlBackend}/estudiantes`, estudiante, {
+      .post<conferencista>(`${this.urlBackend}/conferencistas`, conferencista, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
   }

@@ -13,8 +13,8 @@ import { Navegacion } from '../components/navegacion.component';
 import { Bienvenido } from '../components/bienvenida.component';
 import { Formulario } from '../components/formulario.component';
 import { Tabla } from '../components/tabla.component';
-import { MatriculasService } from '../services/matriculas.service';
-import { matricula } from '../interfaces/matricula.interface';
+import { ReservasService } from '../services/reservas.service';
+import { reserva } from '../interfaces/reserva.interface';
 import {
   FormControl,
   FormGroup,
@@ -48,9 +48,9 @@ import { Carga } from '../components/carga.component';
               />
             </svg>
           </button>
-          <img class="w-10 h-10" src="logo.png" alt="Logo de matriculas" />
+          <img class="w-10 h-10" src="logo.png" alt="Logo de reservas" />
           <h1 class="font-semibold text-[16px] text-[#3B3D3E] hidden sm:block">
-            Sistema de Gestión de Matriculas
+            Sistema de Gestión de Conferencias
           </h1>
         </div>
         <div class="flex  gap-4">
@@ -74,9 +74,9 @@ import { Carga } from '../components/carga.component';
           <div
             class="flex flex-col bg-white p-5 pl-9 rounded-[12px] flex-1 text-[23px] font-bold"
           >
-            <h1 class="">Matriculas</h1>
+            <h1 class="">Reservas</h1>
             <button
-              class="w-[125px] mt-1 p-2 rounded-[8px] bg-[#2872FF] text-white font-light text-[14px]"
+              class="w-[125px] mt-1 p-2 rounded-[8px] bg-[#2E2E2E] text-white font-light text-[14px]"
               (click)="mostrarModal.set(true)"
             >
               + Crear Nuevo
@@ -84,10 +84,10 @@ import { Carga } from '../components/carga.component';
 
             <formulario
               [(mostrarModal)]="mostrarModal"
-              titulo="matricula"
+              titulo="reserva"
               acciones="Registrar"
-              [datosFormulario]="datosMatriculas"
-              [servicioRegistrar]="serviceMatricula"
+              [datosFormulario]="datosReservas"
+              [servicioRegistrar]="serviceReserva"
               (cambioEmitir)="datosCreados($event)"
             ></formulario>
 
@@ -122,10 +122,10 @@ import { Carga } from '../components/carga.component';
             }@else {
 
             <tabla
-              titulo="matricula"
+              titulo="reserva"
               [datosTabla]="datosBuscados()"
-              [datosAlmacenados]="datosMatriculas"
-              [servicioEliminar]="serviceMatricula"
+              [datosAlmacenados]="datosReservas"
+              [servicioEliminar]="serviceReserva"
               (cambioEliminar)="datosEliminados($event)"
             ></tabla>
             }
@@ -135,7 +135,7 @@ import { Carga } from '../components/carga.component';
     </main>
   `,
 })
-export class MatriculasPage {
+export class ReservasPage {
   //1.false: menu de navegacion oculto
   //Variable que hara que la barra de navegacion se muestre o no se muestre
 
@@ -145,67 +145,67 @@ export class MatriculasPage {
   //estado de carga
   public carga = signal<boolean>(true);
 
-  public serviceMatricula = inject(MatriculasService);
+  public serviceReserva = inject(ReservasService);
 
   public busqueda = signal<string>('');
 
   //variable que almacena datos filtrados de barra de busqueda
-  public datosBuscados = linkedSignal<matricula[]>(() => {
-    const datosMatriculas = this.matriculas();
+  public datosBuscados = linkedSignal<reserva[]>(() => {
+    const datosReservas = this.reservas();
     if (this.busqueda() !== '') {
-      return datosMatriculas.filter((registro) =>
+      return datosReservas.filter((registro) =>
         Object.values(registro).some((valor) =>
           valor.toString().toLowerCase().includes(this.busqueda().toLowerCase())
         )
       );
     }
-    return datosMatriculas;
+    return datosReservas;
   });
 
-  public matriculas = signal<matricula[]>([]);
+  public reservas = signal<reserva[]>([]);
 
   //Informacion que aparecera en los iconos, para ver, editar y crear
-  public datosMatriculas = new FormGroup({
+  public datosReservas = new FormGroup({
     codigo: new FormControl('', [Validators.required, Validators.minLength(5)]),
     descripcion: new FormControl('', [
       Validators.required,
     ]),
-    id_estudiante: new FormControl('', [
+    id_conferencista: new FormControl('', [
       Validators.required,
     ]),
-    id_materia: new FormControl('', [
+    id_auditorio: new FormControl('', [
       Validators.required, 
       ]),
   });
 
   //funcion para recibir datos creados
-  public datosCreados(datoCreado: matricula) {
-    this.matriculas.update((matriculasActuales) => [
-      ...matriculasActuales,
+  public datosCreados(datoCreado: reserva) {
+    this.reservas.update((reservasActuales) => [
+      ...reservasActuales,
       datoCreado,
     ]);
   }
 
   //funcion que recibe los datos de eliminados
   public datosEliminados(idEliminado: number) {
-    this.matriculas.update((datos) =>
+    this.reservas.update((datos) =>
       datos?.filter((registro) => registro.id !== idEliminado)
     );
   }
 
   ///////////////////////////////////////////////////////
-  //consumo de endpoint de matriculas
+  //consumo de endpoint de reservas
   constructor(
     private router: Router,
     private breakpointObserver: BreakpointObserver
   ) {
-    this.serviceMatricula
+    this.serviceReserva
       .obtener()
       .subscribe({
-        next: (matricula:any) => {
-          this.matriculas.set(matricula);
-          console.log(matricula);
-          this.datosBuscados.set(matricula);
+        next: (reserva:any) => {
+          this.reservas.set(reserva);
+          console.log(reserva);
+          this.datosBuscados.set(reserva);
         },
       })
       .add(() => {

@@ -14,8 +14,8 @@ import { Navegacion } from '../components/navegacion.component';
 import { Bienvenido } from '../components/bienvenida.component';
 import { Formulario } from '../components/formulario.component';
 import { Tabla } from '../components/tabla.component';
-import { EstudiantesService } from '../services/estudiantes.service';
-import { estudiante } from '../interfaces/estudiante.interface';
+import { ConferencistasService } from '../services/conferencistas.service';
+import { conferencista } from '../interfaces/conferencista.interface';
 import {
   FormControl,
   FormGroup,
@@ -50,9 +50,9 @@ import { Carga } from '../components/carga.component';
               />
             </svg>
           </button>
-          <img class="w-10 h-10" src="logo.png" alt="Logo de matriculas" />
+          <img class="w-10 h-10" src="logo2.png" alt="Logo de reservas" />
           <h1 class="font-semibold text-[16px] text-[#3B3D3E] hidden sm:block">
-            Sistema de Gestión de Matriculas
+            Sistema de Gestión de Conferencias
           </h1>
         </div>
         <div class="flex  gap-4">
@@ -76,9 +76,9 @@ import { Carga } from '../components/carga.component';
           <div
             class="flex flex-col bg-white p-5 pl-9 rounded-[12px] flex-1 text-[23px] font-bold"
           >
-            <h1 >Estudiantes</h1>
+            <h1 >Conferencistas</h1>
             <button
-              class="w-[125px] mt-1 p-2 rounded-[8px] bg-[#2872FF] text-white font-light text-[14px]"
+              class="w-[125px] mt-1 p-2 rounded-[8px] bg-[#2E2E2E] text-white font-light text-[14px]"
               (click)="mostrarModal.set(true)"
             >
               + Crear Nuevo
@@ -86,10 +86,10 @@ import { Carga } from '../components/carga.component';
 
             <formulario
               [(mostrarModal)]="mostrarModal"
-              titulo="estudiante"
+              titulo="conferencista"
               acciones="Registrar"
-              [datosFormulario]="datosEstudiantes"
-              [servicioRegistrar]="serviceEstudiante"
+              [datosFormulario]="datosConferencistas"
+              [servicioRegistrar]="serviceConferencista"
               (cambioEmitir)="datosCreados($event)"
             ></formulario>
 
@@ -123,10 +123,10 @@ import { Carga } from '../components/carga.component';
             }@else {
 
             <tabla
-              titulo="estudiante"
+              titulo="conferencista"
               [datosTabla]="datosBuscados()"
-              [datosAlmacenados]="datosEstudiantes"
-              [servicioEliminar]="serviceEstudiante"
+              [datosAlmacenados]="datosConferencistas"
+              [servicioEliminar]="serviceConferencista"
               (cambioEliminar)="datosEliminados($event)"
               (cambioEliminar)="datosEliminados($event)"
             ></tabla>
@@ -137,7 +137,7 @@ import { Carga } from '../components/carga.component';
     </main>
   `,
 })
-export class EstudiantesPage {
+export class ConferencistasPage {
   //1.false: menu de navegacion oculto
   //Variable que hara que la barra de navegacion se muestre o no se muestre
   public mostrar = signal<boolean>(true);
@@ -146,28 +146,28 @@ export class EstudiantesPage {
   //estado de carga
   public carga = signal<boolean>(true);
 
-  public serviceEstudiante = inject(EstudiantesService);
+  public serviceConferencista = inject(ConferencistasService);
 
   public busqueda = signal<string>('');
 
   //variable que almacena datos filtrados de barra de busqueda
-  public datosBuscados = linkedSignal<estudiante[]>(() => {
-    const datosEstudiantes = this.estudiantes();
+  public datosBuscados = linkedSignal<conferencista[]>(() => {
+    const datosConferencistas = this.conferencistas();
     if (this.busqueda() !== '') {
-      return datosEstudiantes.filter((registro) =>
+      return datosConferencistas.filter((registro) =>
         Object.values(registro).some((valor) =>
           valor.toString().toLowerCase().includes(this.busqueda().toLowerCase())
         )
       );
     }
-    return datosEstudiantes;
+    return datosConferencistas;
   });
 
   //variable que almacena lo que traera del backend
-  public estudiantes = signal<estudiante[]>([]);
+  public conferencistas = signal<conferencista[]>([]);
 
   //Informacion que aparecera en los iconos, para ver, editar y crear
-  public datosEstudiantes = new FormGroup({
+  public datosConferencistas = new FormGroup({
     nombre: new FormControl('', [
       Validators.required,
     ]),
@@ -177,45 +177,52 @@ export class EstudiantesPage {
     cedula: new FormControl('', [
       Validators.required,
     ]),
-    fecha_nacimiento: new FormControl('', [Validators.required]),
+    genero: new FormControl('', [
+      Validators.required,
+    ]),
     ciudad: new FormControl('', [
       Validators.required,
     ]),
     direccion: new FormControl('', [
       Validators.required,
     ]),
+    fecha_nacimiento: new FormControl('', [Validators.required]),
+    
     telefono: new FormControl('', [
       Validators.required,
     ]),
     email: new FormControl('', [Validators.required, Validators.email]),
+    empresa: new FormControl('', [
+      Validators.required,
+    ]),
   });
 
   //funcion para recibir datos creados
-  public datosCreados(datoCreado: estudiante) {
-    this.estudiantes.update((estudiantesActuales) => [
-      ...estudiantesActuales,
+  public datosCreados(datoCreado: conferencista) {
+    this.conferencistas.update((conferencistasActuales) => [
+      ...conferencistasActuales,
       datoCreado,
     ]);
   }
 
   //funcion que recibe los datos de eliminados
   public datosEliminados(idEliminado: number) {
-    this.estudiantes.update((datos) =>
+    this.conferencistas.update((datos) =>
       datos?.filter((registro) => registro.id !== idEliminado)
     );
   }
 
-  //consumo de endpoint de estudiantes
+  //consumo de endpoint de conferencistas
   constructor(
     private router: Router,
     private breakpointObserver: BreakpointObserver
   ) {
-    this.serviceEstudiante
+    this.serviceConferencista
       .obtener()
       .subscribe({
-        next: (estudiante: any) => {
-          this.estudiantes.set(estudiante);
-          this.datosBuscados.set(estudiante);
+        next: (conferencista: any) => {
+          this.conferencistas.set(conferencista);
+          this.datosBuscados.set(conferencista);
         },
       })
       .add(() => {

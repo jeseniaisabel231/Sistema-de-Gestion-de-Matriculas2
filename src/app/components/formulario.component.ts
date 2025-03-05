@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-export type TituloForms = 'estudiante' | 'materia' | 'matricula'; //representacion de la clave
+export type TituloForms = 'conferencista' | 'auditorio' | 'reserva'; //representacion de la clave
 export type Actions = 'Registrar' | 'Actualizar' | 'Visualizar';
 
 @Component({
@@ -84,7 +84,7 @@ export type Actions = 'Registrar' | 'Actualizar' | 'Visualizar';
           Cancelar
         </button>
         <button
-          class="bg-[#0042FF] rounded-[10px] p-2 text-white px-5 font-normal"
+          class="bg-[#181818] rounded-[10px] p-2 text-white px-5 font-normal"
           (click)="onSubmit()"
         >
           {{ acciones() }}
@@ -109,7 +109,7 @@ export class Formulario {
 
   public desabilitado = input<boolean>(false);
 
-  //variable que almacena datos de materias\estudiantes\matriculas
+  //variable que almacena datos de auditorios\conferencistas\reservas
   public datosFormulario = input<FormGroup>(); //utilizar el atributo para enviar datos al formulario ES UN ATRIBUTO
 
   public servicioRegistrar = input<any>();
@@ -117,29 +117,32 @@ export class Formulario {
   public idRegistro = input<number>();
 
   public inputs: Record<TituloForms, Record<string, string>> = {
-    estudiante: {
+    conferencista: {
       //claves
       //valor
       nombre: 'text',
       apellido: 'text',
       cedula: 'number',
-      fecha_nacimiento: 'date',
+      genero: 'text',
       ciudad: 'text',
       direccion: 'text',
+      fecha_nacimiento: 'date',
       telefono: 'number',
       email: 'email',
+      empresa: 'text',
     },
-    materia: {
+    auditorio: {
+      codigo: 'text',
       nombre: 'text',
+      ubicacion: 'text',
+      capacidad: 'text',
       descripcion: 'text',
-      codigo: 'text',
-      creditos: 'number',
     },
-    matricula: {
+    reserva: {
       codigo: 'text',
       descripcion: 'text',
-      id_estudiante: 'number',
-      id_materia: 'number',
+      id_conferencista: 'number',
+      id_auditorio: 'number',
     },
   };
 

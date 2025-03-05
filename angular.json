@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sistema_gestion_matriculas": {
+    "sistema_gestion_reservas": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/sistema_gestion_matriculas",
+            "outputPath": "dist/sistema_gestion_reservas",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "sistema_gestion_matriculas:build:production"
+              "buildTarget": "sistema_gestion_reservas:build:production"
             },
             "development": {
-              "buildTarget": "sistema_gestion_matriculas:build:development"
+              "buildTarget": "sistema_gestion_reservas:build:development"
             }
           },
           "defaultConfiguration": "development"

@@ -1,12 +1,14 @@
-export interface estudiante{
+export interface conferencista{
     id : number,
     nombre: string,
     apellido: string,
     cedula: string,
-    fecha_nacimiento: string,
+    genero:string,
     ciudad: string,
     direccion: string,
+    fecha_nacimiento: string,
     telefono: string,
-    email: string
+    email: string,
+    empresa: string
 
 }

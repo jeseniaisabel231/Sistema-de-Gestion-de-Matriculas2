@@ -12,7 +12,7 @@ export const options = {
 };
 
 export default function Homepage() {
-  const BASE_URL = "https://sistema-de-gestion-de-matriculas.vercel.app";
+  const BASE_URL = "https://sistema-de-gestion-de-reservas.vercel.app";
   const headers = {
     "User-Agent": "k6",
     Authorization: `Bearer ${token}`,
@@ -21,7 +21,7 @@ export default function Homepage() {
   let responses = http.batch([
     [
       "GET",
-      `${BASE_URL}/modulo-estudiantes`,
+      `${BASE_URL}/modulo-conferencistas`,
       null,
       { tags: { ctype: "html" }, headers },
     ],

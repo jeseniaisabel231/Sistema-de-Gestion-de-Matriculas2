@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http'; //hacer peticiones http
 import { inject, Injectable, signal } from '@angular/core';
-import { materia } from '../interfaces/materia.interface';
+import { auditorio } from '../interfaces/auditorio.interface';
 import { of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MateriasService {
+export class AuditoriosService {
   private urlBackend =
     'https://integrated-moina-jhonmata0427s-projects-e4972a05.koyeb.app/api/v1';
   private http = inject(HttpClient);
@@ -14,8 +14,8 @@ export class MateriasService {
   //////////////////////////////////////////////////////////////////////////
   //metodo get no se necesita pasar parametros
   obtener() {
-    //Si no hay datos en la cacheMaterias, se hace una peticion GET al backend
-    return this.http.get<materia[]>(`${this.urlBackend}/materias`, {
+    //Si no hay datos en la cacheAuditorios, se hace una peticion GET al backend
+    return this.http.get<auditorio[]>(`${this.urlBackend}/auditorios`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
   }
@@ -25,21 +25,21 @@ export class MateriasService {
 
   //endppoint para eliminar amteria
   eliminar(id: number) {
-    return this.http.delete<void>(`${this.urlBackend}/materias/${id}`, {
+    return this.http.delete<void>(`${this.urlBackend}/auditorios/${id}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
   }
 
-  //endpoitn de actualizar materias
-  actualizar(id: number, datos: materia) {
-    return this.http.put<materia>(`${this.urlBackend}/materias/${id}`, datos, {
+  //endpoitn de actualizar auditorios
+  actualizar(id: number, datos: auditorio) {
+    return this.http.put<auditorio>(`${this.urlBackend}/auditorios/${id}`, datos, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
   }
 
-  //endpoint de crear materia
-  crear(materia: materia) {
-    return this.http.post<materia>(`${this.urlBackend}/materias`, materia, {
+  //endpoint de crear auditorio
+  crear(auditorio: auditorio) {
+    return this.http.post<auditorio>(`${this.urlBackend}/auditorios`, auditorio, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
   }

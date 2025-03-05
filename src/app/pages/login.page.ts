@@ -14,15 +14,15 @@ import { RouteConfigLoadEnd, Router } from '@angular/router';
   template: `
     <main class="flex h-screen">
       <div class="w-full flex flex-col justify-center items-center p-8">
-        <img class="mb-4" src="logo.png" alt="Logo del sistema" />
+        <img class="mb-4" src="logo2.png" alt="Logo del sistema" />
         <div class="flex flex-col items-center gap-9">
           <h1 class="mt-4 text-3xl font-bold text-center">
-            Sistema de Gestión de Matrículas
+            Sistema de Gestión de Conferencias
           </h1>
           <small class="text-[16px] text-center mb-12 text-[#686767]">
             Accede con tu usuario y contraseña para gestionar tus
             <br />
-            matrículas.
+            conferencias.
           </small>
         </div>
         <form
@@ -44,7 +44,7 @@ import { RouteConfigLoadEnd, Router } from '@angular/router';
               />
             </svg>
             <input
-              class="border-[#878787] border p-1.5 pl-12 w-full h-[50px] rounded-[15px] outline-[#0042FF]"
+              class="border-[#878787] border p-1.5 pl-12 w-full h-[50px] rounded-[15px] outline-[#181818]"
               type="email"
               placeholder="Correo Electrónico"
               id="email"
@@ -66,7 +66,7 @@ import { RouteConfigLoadEnd, Router } from '@angular/router';
               />
             </svg>
             <input
-              class="border-[#878787] pl-12 border p-1.5 w-full h-[50px] rounded-[15px] outline-[#0042FF] "
+              class="border-[#878787] pl-12 border p-1.5 w-full h-[50px] rounded-[15px] outline-[#181818] "
               [type]="password() ? 'text' : 'password'"
               placeholder="Contraseña"
               id="password"
@@ -116,7 +116,7 @@ import { RouteConfigLoadEnd, Router } from '@angular/router';
           
 
           <button
-            class=" p-1.5 w-2/3 h-[50px] rounded-[15px] bg-[#0042FF] text-white"
+            class=" p-1.5 w-2/3 h-[50px] rounded-[15px] bg-[#181818] text-white"
           >
           @if (carga()) { 
 
@@ -139,7 +139,7 @@ import { RouteConfigLoadEnd, Router } from '@angular/router';
       </div>
       <img
         class="h-full aspect-square object-cover hidden lg:block"
-        src="fondo.jpg"
+        src="fondo3.png"
         alt=""
       />
     </main>
@@ -175,7 +175,7 @@ export class LoginPage {
         .login(this.formulario.value.email!, this.formulario.value.password!)
         .subscribe({
           next: (response) => {
-            this.serviceRouter.navigate(['/modulo-materias']); //me redireccion a la pantalla de materias, si la peticion fue exitosa
+            this.serviceRouter.navigate(['/modulo-auditorios']); //me redireccion a la pantalla de auditorios, si la peticion fue exitosa
             console.log(response);
             this.carga.set(false);
           },

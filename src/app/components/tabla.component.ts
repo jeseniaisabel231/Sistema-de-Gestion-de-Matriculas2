@@ -9,12 +9,12 @@ import {
 } from '@angular/core';
 import { Actions, Formulario, TituloForms } from './formulario.component';
 import { TitleCasePipe } from '@angular/common';
-import { estudiante } from '../interfaces/estudiante.interface';
-import { materia } from '../interfaces/materia.interface';
-import { matricula } from '../interfaces/matricula.interface';
+import { conferencista } from '../interfaces/conferencista.interface';
+import { auditorio } from '../interfaces/auditorio.interface';
+import { reserva } from '../interfaces/reserva.interface';
 import { FormGroup } from '@angular/forms';
 
-export type DatosTabla = estudiante | materia | matricula;
+export type DatosTabla = conferencista | auditorio | reserva;
 
 @Component({
   selector: 'tabla',
@@ -154,7 +154,7 @@ export class Tabla {
     this.idAcciones.set(datos.id);
   }
 
-  //funcion para eliminar un registro de materias, estudiante o matricula
+  //funcion para eliminar un registro de auditorios, conferencista o reserva
   public eliminarRegistro(id: number) {
     if (confirm('Estas seguro de eliminar este registro')) {
       this.servicioEliminar()

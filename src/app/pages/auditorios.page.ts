@@ -13,8 +13,8 @@ import { Navegacion } from '../components/navegacion.component';
 import { Bienvenido } from '../components/bienvenida.component';
 import { Formulario } from '../components/formulario.component';
 import { Tabla } from '../components/tabla.component';
-import { MateriasService } from '../services/materias.service';
-import { materia } from '../interfaces/materia.interface';
+import { AuditoriosService } from '../services/auditorios.service';
+import { auditorio } from '../interfaces/auditorio.interface';
 import {
   FormControl,
   FormGroup,
@@ -48,9 +48,9 @@ import { Carga } from '../components/carga.component';
               />
             </svg>
           </button>
-          <img class="w-10 h-10" src="logo.png" alt="Logo de matriculas" />
+          <img class="w-10 h-10" src="logo2.png" alt="Logo de reservas" />
           <h1 class="font-semibold text-[16px] text-[#3B3D3E] hidden sm:block">
-            Sistema de Gestión de Matriculas
+            Sistema de Gestión de Conferencias
           </h1>
         </div>
         <div class="flex  gap-4">
@@ -74,9 +74,9 @@ import { Carga } from '../components/carga.component';
           <div
             class="w-full flex flex-col bg-white p-5 pl-9 rounded-[12px] flex-1 text-[23px] font-bold"
           >
-            <h1 class="">Materias</h1>
+            <h1 class="">Auditorios</h1>
             <button
-              class="w-[125px] mt-1 p-2 rounded-[8px] bg-[#2872FF] text-white font-light text-[14px]"
+              class="w-[125px] mt-1 p-2 rounded-[8px] bg-[#2E2E2E] text-white font-light text-[14px]"
               (click)="mostrarModal.set(true)"
             >
               + Crear Nuevo
@@ -84,10 +84,10 @@ import { Carga } from '../components/carga.component';
 
             <formulario
               [(mostrarModal)]="mostrarModal"
-              titulo="materia"
+              titulo="auditorio"
               acciones="Registrar"
-              [datosFormulario]="datosMaterias"
-              [servicioRegistrar]="serviceMateria"
+              [datosFormulario]="datosAuditorios"
+              [servicioRegistrar]="serviceAuditorio"
               (cambioEmitir)="datosCreados($event)"
             ></formulario>
             <div
@@ -120,10 +120,10 @@ import { Carga } from '../components/carga.component';
             }@else {
 
             <tabla
-              titulo="materia"
+              titulo="auditorio"
               [datosTabla]="datosBuscados()"
-              [datosAlmacenados]="datosMaterias"
-              [servicioEliminar]="serviceMateria"
+              [datosAlmacenados]="datosAuditorios"
+              [servicioEliminar]="serviceAuditorio"
               (cambioEliminar)="datosEliminados($event)"
             ></tabla>
             }
@@ -133,7 +133,7 @@ import { Carga } from '../components/carga.component';
     </main>
   `,
 })
-export class MateriasPage {
+export class AuditoriosPage {
   //1.false: menu de navegacion oculto
   //Variable que hara que la barra de navegacion se muestre o no se muestre
   public mostrar = signal<boolean>(true);
@@ -142,75 +142,68 @@ export class MateriasPage {
   //estado de carga
   public carga = signal<boolean>(true);
 
-  //inyectar al servicio para obtener el metodo 'obtenerMaterias()'
-  public serviceMateria = inject(MateriasService);
+  //inyectar al servicio para obtener el metodo 'obtenerAuditorios()'
+  public serviceAuditorio = inject(AuditoriosService);
 
   public busqueda = signal<string>('');
 
   //variable que almacena datos filtrados de barra de busqueda
-  public datosBuscados = linkedSignal<materia[]>(() => {
-    const datosMaterias = this.materias();
+  public datosBuscados = linkedSignal<auditorio[]>(() => {
+    const datosAuditorios = this.auditorios();
     if (this.busqueda() !== '') {
-      return datosMaterias.filter((registro) =>
+      return datosAuditorios.filter((registro) =>
         Object.values(registro).some((valor) =>
           valor.toString().toLowerCase().includes(this.busqueda().toLowerCase())
         )
       );
     }
-    return datosMaterias;
+    return datosAuditorios;
   });
 
   //variable que almacena lo que traera del backend
-  public materias = signal<materia[]>([]);
+  public auditorios = signal<auditorio[]>([]);
   //      variable type de dato inicializado
 
   //Informacion que aparecera en los iconos, para ver, editar y crear
-  public datosMaterias = new FormGroup({
-    nombre: new FormControl('', [
-      Validators.required, 
-      ]),
-    codigo: new FormControl('', [
-      
-      Validators.required,]),
-    descripcion: new FormControl('', [
-      Validators.required,
-    ]),
-    creditos: new FormControl('', [
-      Validators.required,
-    ]),
+  public datosAuditorios = new FormGroup({
+    codigo: new FormControl('', [Validators.required]),
+    nombre: new FormControl('', [Validators.required]),
+    ubicacion: new FormControl('', [Validators.required]),
+    capacidad: new FormControl('', [Validators.required]),
+    descripcion: new FormControl('', [Validators.required]),
   });
 
   //funcion para recibir datos creados
-  public datosCreados(datoCreado: materia) {
-    this.materias.update((materiasActuales) => [
-      ...materiasActuales,
+  public datosCreados(datoCreado: auditorio) {
+    this.auditorios.update((auditoriosActuales) => [
+      ...auditoriosActuales,
       datoCreado,
     ]);
   }
 
   //funcion que recibe los datos de eliminados
   public datosEliminados(idEliminado: number) {
-    this.materias.update((datos) =>
+    this.auditorios.update((datos) =>
       datos?.filter((registro) => registro.id !== idEliminado)
     );
   }
 
-  //consumo de endpoint de materias
+  //consumo de endpoint de auditorios
   constructor(
     private router: Router,
     private breakpointObserver: BreakpointObserver
   ) {
-    //obtiene la lista de materias en un observable, por lo que se usa .suscribe para obtener la respuesta
-    this.serviceMateria
+    //obtiene la lista de auditorios en un observable, por lo que se usa .suscribe para obtener la respuesta
+    this.serviceAuditorio
       .obtener()
       .subscribe({
-        next: (materia: any) => {
-          //contiene el arreglo de materias obtenidas desde el backend.
+        next: (auditorio: any) => {
+          //contiene el arreglo de auditorios obtenidas desde el backend.
 
-          this.materias.set(materia);
-          console.log(materia);
-          this.datosBuscados.set(materia);
-          //Se asigna ese arreglo a this.materias, lo que actualiza la variable con los datos obtenidos.
+          this.auditorios.set(auditorio);
+          console.log(auditorio);
+          this.datosBuscados.set(auditorio);
+          //Se asigna ese arreglo a this.auditorios, lo que actualiza la variable con los datos obtenidos.
         },
       })
       .add(() => {

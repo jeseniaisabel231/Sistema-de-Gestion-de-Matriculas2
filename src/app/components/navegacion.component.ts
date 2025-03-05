@@ -19,12 +19,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
         <ul class="flex flex-col gap-3 pl-8 pt-7 text-[14px] text-[#3B3D3E] ">
           <li class="flex">
             <a
-              class="flex items-center gap-2 text-[#3B3D3E] hover:text-[#003BE4] font-normal transition-colors duration-initial hover:bg-[#CFE9FF] p-2 rounded-[12px] w-full"
-              routerLink="/modulo-materias"
+              class="flex items-center gap-2 text-[#3B3D3E] hover:text-[#003BE4] font-normal transition-colors duration-initial hover:bg-[#B6B6B6] p-2 rounded-[12px] w-full"
+              routerLink="/modulo-auditorios"
               [ngClass]="{
-                'bg-[#CFE9FF] text-[#003BE4]':
-                  rutaActiva() === 'modulo-materias',
-                'text-[#3B3D3E]': rutaActiva() !== 'modulo-materias'
+                'bg-[#B6B6B6] text-[#003BE4]':
+                  rutaActiva() === 'modulo-auditorios',
+                'text-[#3B3D3E]': rutaActiva() !== 'modulo-auditorios'
               }"
             >
               <svg
@@ -44,18 +44,18 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
                   stroke-linejoin="round"
                 />
               </svg>
-              Módulo Materias
+              Módulo Auditorios
             </a>
           </li>
 
           <li class="flex">
             <a
-              class="flex items-center gap-2 text-[#3B3D3E] hover:text-[#003BE4] font-normal transition-colors duration-initial  hover:bg-[#CFE9FF] p-2 rounded-[12px] w-full"
-              routerLink="/modulo-estudiantes"
+              class="flex items-center gap-2 text-[#3B3D3E] hover:text-[#003BE4] font-normal transition-colors duration-initial  hover:bg-[#B6B6B6] p-2 rounded-[12px] w-full"
+              routerLink="/modulo-conferencistas"
               [ngClass]="{
-                'bg-[#CFE9FF] text-[#003BE4]':
-                  rutaActiva() === 'modulo-estudiantes',
-                'text-[#3B3D3E]': rutaActiva() !== 'modulo-estudiantes'
+                'bg-[#B6B6B6] text-[#003BE4]':
+                  rutaActiva() === 'modulo-conferencistas',
+                'text-[#3B3D3E]': rutaActiva() !== 'modulo-conferencistas'
               }"
             >
               <svg
@@ -83,18 +83,18 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
                   stroke-linecap="round"
                 />
               </svg>
-              Módulo Estudiantes
+              Módulo Conferencistas
             </a>
           </li>
 
           <li class="flex ">
             <a
-              class="flex items-center gap-2 text-[#3B3D3E] hover:text-[#003BE4] font-normal transition-colors duration-initial hover:bg-[#CFE9FF] p-2 rounded-[12px] w-full"
-              routerLink="/modulo-matriculas"
+              class="flex items-center gap-2 text-[#3B3D3E] hover:text-[#003BE4] font-normal transition-colors duration-initial hover:bg-[#B6B6B6] p-2 rounded-[12px] w-full"
+              routerLink="/modulo-reservas"
               [ngClass]="{
-                'bg-[#CFE9FF] text-[#003BE4]':
-                  rutaActiva() === 'modulo-matriculas',
-                'text-[#3B3D3E]': rutaActiva() !== 'modulo-matriculas'
+                'bg-[#B6B6B6] text-[#003BE4]':
+                  rutaActiva() === 'modulo-reservas',
+                'text-[#3B3D3E]': rutaActiva() !== 'modulo-reservas'
               }"
             >
               <svg
@@ -116,7 +116,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
                   stroke-linecap="round"
                 />
               </svg>
-              Módulo Matriculas
+              Módulo Reservas
             </a>
           </li>
         </ul>
