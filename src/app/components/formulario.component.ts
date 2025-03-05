@@ -26,7 +26,7 @@ export type Actions = 'Registrar' | 'Actualizar' | 'Visualizar';
       class="flex flex-col m-auto bg-white backdrop:backdrop-blur-xs rounded-[15px]"
     >
       <div
-        class="flex  items-center bg-[#4F9CFF] p-3 rounded-t-[15px] justify-between px-7"
+        class="flex  items-center bg-[#B6B6B6] p-3 rounded-t-[15px] justify-between px-7"
       >
         <h1 class="text-[20px] text-white font-medium">
           {{ acciones() }} {{ titulo() | titlecase }}
