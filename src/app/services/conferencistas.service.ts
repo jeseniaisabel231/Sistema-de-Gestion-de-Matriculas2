@@ -8,7 +8,7 @@ import { conferencista} from '../interfaces/conferencista.interface';
 })
 export class ConferencistasService {
   private urlBackend =
-    'https://integrated-moina-jhonmata0427s-projects-e4972a05.koyeb.app/api/v1';
+    'https://sharp-lisa-jhonmata0427s-projects-a5f958cc.koyeb.app/api/v1';
   private http = inject(HttpClient);
 
   

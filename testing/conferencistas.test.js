@@ -12,7 +12,7 @@ export const options = {
 };
 
 export default function Homepage() {
-  const BASE_URL = "https://sistema-de-gestion-de-reservas.vercel.app";
+  const BASE_URL = "https://sistema-de-gestion-de-conferencias.vercel.app";
   const headers = {
     "User-Agent": "k6",
     Authorization: `Bearer ${token}`,
