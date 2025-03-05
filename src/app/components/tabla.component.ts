@@ -27,7 +27,7 @@ export type DatosTabla = conferencista | auditorio | reserva;
         class="text-[14px] mt-6 table-auto border-collapse border-y-[2px] border-[#C5C6C6] w-full"
       >
         <thead>
-          <tr class="border-y-[2px] border-[#dff1fb] bg-[#dff1fb]">
+          <tr class="border-y-[2px] border-[#E0E0E0] bg-[#E0E0E0]">
             @for (columna of columnas(); track $index) {
             <th class="py-2 p-1 text-center">{{ columna | titlecase }}</th>
             }

@@ -19,10 +19,10 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
         <ul class="flex flex-col gap-3 pl-8 pt-7 text-[14px] text-[#3B3D3E] ">
           <li class="flex">
             <a
-              class="flex items-center gap-2 text-[#3B3D3E] hover:text-[#003BE4] font-normal transition-colors duration-initial hover:bg-[#B6B6B6] p-2 rounded-[12px] w-full"
+              class="flex items-center gap-2 text-[#3B3D3E] hover:text-[#000000] font-normal transition-colors duration-initial hover:bg-[#B6B6B6] p-2 rounded-[12px] w-full"
               routerLink="/modulo-auditorios"
               [ngClass]="{
-                'bg-[#B6B6B6] text-[#003BE4]':
+                'bg-[#B6B6B6] text-[#000000]':
                   rutaActiva() === 'modulo-auditorios',
                 'text-[#3B3D3E]': rutaActiva() !== 'modulo-auditorios'
               }"
@@ -50,10 +50,10 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 
           <li class="flex">
             <a
-              class="flex items-center gap-2 text-[#3B3D3E] hover:text-[#003BE4] font-normal transition-colors duration-initial  hover:bg-[#B6B6B6] p-2 rounded-[12px] w-full"
+              class="flex items-center gap-2 text-[#3B3D3E] hover:text-black font-normal transition-colors duration-initial  hover:bg-[#B6B6B6] p-2 rounded-[12px] w-full"
               routerLink="/modulo-conferencistas"
               [ngClass]="{
-                'bg-[#B6B6B6] text-[#003BE4]':
+                'bg-[#B6B6B6] text-black':
                   rutaActiva() === 'modulo-conferencistas',
                 'text-[#3B3D3E]': rutaActiva() !== 'modulo-conferencistas'
               }"
@@ -89,10 +89,10 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 
           <li class="flex ">
             <a
-              class="flex items-center gap-2 text-[#3B3D3E] hover:text-[#003BE4] font-normal transition-colors duration-initial hover:bg-[#B6B6B6] p-2 rounded-[12px] w-full"
+              class="flex items-center gap-2 text-[#3B3D3E] hover:text-black font-normal transition-colors duration-initial hover:bg-[#B6B6B6] p-2 rounded-[12px] w-full"
               routerLink="/modulo-reservas"
               [ngClass]="{
-                'bg-[#B6B6B6] text-[#003BE4]':
+                'bg-[#B6B6B6] text-black':
                   rutaActiva() === 'modulo-reservas',
                 'text-[#3B3D3E]': rutaActiva() !== 'modulo-reservas'
               }"

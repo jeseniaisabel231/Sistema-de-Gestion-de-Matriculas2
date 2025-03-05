@@ -48,7 +48,7 @@ import { Carga } from '../components/carga.component';
               />
             </svg>
           </button>
-          <img class="w-10 h-10" src="logo.png" alt="Logo de reservas" />
+          <img class="w-10 h-10" src="logo2.png" alt="Logo de reservas" />
           <h1 class="font-semibold text-[16px] text-[#3B3D3E] hidden sm:block">
             Sistema de Gestión de Conferencias
           </h1>
